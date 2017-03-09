@@ -1,13 +1,45 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+<script src="jquery.tmpl.js"></script>
+<script src="render.js"></script>
+<script src="storageManager.js"></script>
 <script src="requestToTwitter.js"></script>
-<!-- Latest compiled and minified CSS -->
 
 </head>
 <body>
 <div class="row">
-<div class="col-md-8 col-md-offset-2" id="result"></div>
+<div class="col-md-8 col-md-offset-2">
+<table id="result" class="table table-striped">
+	<tr>Tweets by tag #test</tr>
+	<tr id="count"></tr>
+</table>
+<a href="readedTweets.html">Readed tweets</a>  
 </div>
+
+
+
+</div>
+
+
+
+<script id="renderedTwetts" type="text/html">
+{{each statuses}}
+<tr>
+<td>${$value.Text}</td>
+<td>
+<button id=${$index} class="btn btn-success">Read</button>
+</td>
+</tr>
+{{/each}}
+</script>
 </body>
 </html>

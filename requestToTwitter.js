@@ -1,62 +1,80 @@
 (function(){
 	'use strict';
-	 var xmlHTTPRequest;
 	 var tweetsByTeg;
+	 
+	 var countReadedTweets=0;
 
-window.onload=requestToTwitter;
-	
+	 debugger;
+	 var readedTweets=[];
+	 
+	window.onload=requestToTwitter;
 
 
-function requestToTwitter(){
-	xmlHTTPRequest =new XMLHttpRequest();
-	xmlHTTPRequest.open("GET", "http://localhost:520/api/Twitter/GetTweets");
-	debugger;
-
-	xmlHTTPRequest.onreadystatechange = function() {
-    if (this.status == 200)
-    	{
-       	 tweetsByTeg= JSON.parse(this.responseText);
-       	 renderTweetsTable();
-        	debugger;
-    	}
-	};
-		xmlHTTPRequest.send();
-};
-
-function renderTweetsTable(){
-	var table=document.createElement("table");
-	table.className="table table-striped";
-	debugger;
-
-	var trHead=document.createElement("tr");
-	trHead.innerHTML="Tweets by tag #test";
-
-	table.appendChild(trHead);
-
-	
-
-	for (var i=0; i< tweetsByTeg.Data.statuses.length;i++)
-	{
-
-		var trBody=document.createElement("tr");
-		trBody.className="mt-1";
-
-		var td=document.createElement("td");
-		td.className="bg-info";
-		td.innerHTML=tweetsByTeg.Data.statuses[i].Text;
-
-		var tdButton=document.createElement("button");
-		tdButton.innerHTML="read";
-		tdButton.className="btn btn-success";
-
-		trBody.appendChild(td);
-		trBody.appendChild(tdButton);
-		
-		table.appendChild(trBody);
+	function checkSessionStorage(){
+		if (storageManager.getItem("readedTweets")!=null && storageManager.getItem("readedTweets")!="")
+			{
+				debugger;
+				readedTweets=JSON.parse(storageManager.getItem("readedTweets"));
+				countReadedTweets=readedTweets.length;
+			}
+		else 
+			{
+			storageManager.setItem("readedTweets", "");
+			}
 	}
+
+	function requestToTwitter(){
+	debugger;
+		$.ajax({
+				type: "GET",
+				dataType: "json",
+				traditional: true,
+				data: "",
+				url: "http://localhost:520/api/Tweets/GetTweets",
+				success: function (data) {
+					debugger;
+					tweetsByTeg= data;
+       				renderTweets.renderTweetsTable(tweetsByTeg.Data);
+        			debugger;
+					}
+			});
+		
+		checkSessionStorage();
+		
+	};
+
+	function pushTweet(tweet){
+		readedTweets.push(tweet);
+		storageManager.setItem("readedTweets", JSON.stringify(readedTweets));
+	};
+
+function isReadedTweet(tweet){
+	debugger;
+	if (readedTweets.length==0)
+		return false;
+	else
+	for (var i=0; i<readedTweets.length;i++)
+	{
+		if (readedTweets[i].Id==tweet.Id)
+		{
+
+			return true;
+		}
+	}
+	return false;
+}
+
+function readTweet(){
+	debugger;
+	var i = this.parentNode.rowIndex;
+	pushTweet(tweetsByTeg.Data.statuses[i-2]);
+
+	tweetsByTeg.Data.statuses.splice(i-2, 1);
 	
-	var result=document.getElementById("result");
-	result.appendChild(table);
+	var table=document.getElementById("result").children[0];
+	table.deleteRow(Number(i));
+	countReadedTweets+=1;
+	render.renderCountOfReadedTweets(countReadedTweets);
 };
 
 }());

@@ -1,0 +1,15 @@
+
+<html>
+<head>
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.open("POST", "https://api.twitter.com/oauth/request_token", true);
+xhttp.setRequestHeader('Accept', '*/*');
+
+xhttp.setRequestHeader('Authorization', 'OAuth oauth_callback="http%3A%2F%2Flocalhost%2Fsign-in-with-twitter%2F"');
+xhttp.setRequestHeader('Authorization', 'oauth_consumer_key="cChZNFj6T5R0TigYB9yd1w"');
+
+xhttp.send("");
+</script>
+</head>
+</html>
