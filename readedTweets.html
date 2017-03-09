@@ -7,7 +7,22 @@
 </head>
 <body>
 <div class="row">
-<div class="col-md-8 col-md-offset-2" id="result"></div>
+<div class="col-md-8 col-md-offset-2">
+	
+	<table id="result" class="table table-striped">
+	<tr>Tweets by tag #test</tr>
+</table>
 </div>
+
+</div>
+
+<script id="renderedTwetts" type="text/html">
+{{each statuses}}
+<tr>
+<td>${$value.Text}</td>
+</tr>
+{{/each}}
+</script>
+
 </body>
 </html>

@@ -1,9 +1,9 @@
 (function(){
 	debugger;
 'use strict';
-var tweetsByTeg=JSON.parse(window.sessionStorage.readedTweets);
-window.onload=renderTweetsTable;
-
+var readedTweets=JSON.parse(storageManager.getItem("readedTweets"));
+window.onload=renderTweets.renderTweetsTable(readedTweets);
+/*
 function renderTweetsTable(){
 	var table=document.createElement("table");
 	table.className="table table-striped";
@@ -34,5 +34,5 @@ function renderTweetsTable(){
 	
 	var result=document.getElementById("result");
 	result.appendChild(table);
-};
+};*/
 }());
