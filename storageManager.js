@@ -4,11 +4,11 @@ var storageManager=(function(){
 	return {
 		
 		setItem:function(name,data){
-			debugger;
+			//debugger;
 			storage.setItem(name,data);
 		},
 		getItem:function(name){
-			debugger;
+			//debugger;
 			return storage.getItem(name);
 		}
 	};

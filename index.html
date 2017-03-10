@@ -10,9 +10,7 @@
 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
 <script src="jquery.tmpl.js"></script>
-<script src="render.js"></script>
-<script src="storageManager.js"></script>
-<script src="requestToTwitter.js"></script>
+
 
 </head>
 <body>
@@ -29,14 +27,30 @@
 
 
 <script id="renderedTwetts" type="text/html">
-{{each statuses}}
+{{each tweets}}
 <tr>
 <td>${$value.Text}</td>
 <td>
-<button id=${$index} class="btn btn-success">Read</button>
+<button id=${$index} class="btn btn-success read">Read</button>
 </td>
 </tr>
 {{/each}}
 </script>
+
+<script id="renderedMessage" type="text/html">
+
+<tr>
+${Message}
+
+</tr>
+
+</script>
+
+<script src="render.js"></script>
+<script src="storageManager.js"></script>
+<script src="tweets.js"></script>
+<script src="requests.js"></script>
+<script src="index.js"></script>
+
 </body>
 </html>

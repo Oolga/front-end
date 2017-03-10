@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using TweetSharp;
 
@@ -20,8 +21,12 @@ namespace testTwitterWebApi.Controllers
 		public JsonResult GetTweets()
 		{
 
-			SearchOptions options = new SearchOptions { Q = "#test", Resulttype = TwitterSearchResultType.Recent, Count = 10 };
-			var searchedTweets = twitter.Search(options);
+			//	SearchOptions options = new SearchOptions { Q = "#test", Resulttype = TwitterSearchResultType.Recent, Count = 10 };
+			//var searchedTweets = twitter.Search(options);
+
+			ListTweetsOnUserTimelineOptions options = new ListTweetsOnUserTimelineOptions { ScreenName= "testAppTApi10"};
+
+			List<TwitterStatus> searchedTweets = new List<TwitterStatus>( twitter.ListTweetsOnUserTimeline(options));
 
 			return new JsonResult()
 			{

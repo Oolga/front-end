@@ -1,38 +1,14 @@
 (function(){
 	debugger;
-'use strict';
-var readedTweets=JSON.parse(storageManager.getItem("readedTweets"));
-window.onload=renderTweets.renderTweetsTable(readedTweets);
-/*
-function renderTweetsTable(){
-	var table=document.createElement("table");
-	table.className="table table-striped";
-	debugger;
+	'use strict';
+	var readedTweets=JSON.parse(storageManager.getItem("readedTweets"));
+	var result=$("#result");
+	var	renderedTweets=$("#renderedTwetts");
 
-	var trHead=document.createElement("tr");
-	trHead.innerHTML="Tweets by tag #test";
+	$(document).ready(function(){
+		debugger;
+		renderTweets.setTegs(null,renderedTweets,result);
 
-	table.appendChild(trHead);
-
-	
-
-	for (var i=0; i< tweetsByTeg.length;i++)
-	{
-
-		var trBody=document.createElement("tr");
-		trBody.className="mt-1";
-		trBody.id=tweetsByTeg[i].id;
-
-		var td=document.createElement("td");
-		td.className="bg-info";
-		td.innerHTML=tweetsByTeg[i].Text;
-
-		trBody.appendChild(td);
-
-		table.appendChild(trBody);
-	}
-	
-	var result=document.getElementById("result");
-	result.appendChild(table);
-};*/
+		renderTweets.renderTweetsTable(readedTweets);
+	});
 }());
