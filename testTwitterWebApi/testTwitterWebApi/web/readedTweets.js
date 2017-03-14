@@ -25,10 +25,11 @@
 	$(document).ready(function(){
 		debugger;
 		renderTweets.setTegs(null,renderedTweets,result);
-		var s=storageManager().getStorage().getItem(itemName);
-		if (storageManager().getStorage().getItem(itemName)!=="" && storageManager().getStorage().getItem(itemName)!==null)
+		//readedTweets=storageManager().getItem(itemName);
+		var s=storageManager().getItem(itemName);
+		if (s.length!==0)
 		{
-			readedTweets=JSON.parse(storageManager().getStorage().getItem(itemName));
+			readedTweets=s;
 		}
 
 		if (readedTweets.length>0 || readedTweets!=="")

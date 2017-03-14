@@ -1,7 +1,7 @@
 ﻿var requests=(function () {
 	return {
 		requestGET: function (url, data, callBackFunction,dataType) {
-			debugger;
+			//debugger;
 			$.ajax({
 				type: "GET",
 				dataType: dataType,
@@ -11,7 +11,7 @@
 				async:false,
                 cache:false,
 				success: function (data) {
-					debugger;
+					//debugger;
 					if (callBackFunction != undefined && typeof callBackFunction == "function") {
 						callBackFunction(data);
 					}

@@ -25,8 +25,7 @@
 		debugger;
 		myIndexedDB().init();
 		//getStorage().setStorage();
-		storageManager().getStorage();
-		//countReadedTweets=twitter.checkStorage();
+		countReadedTweets=twitter.checkStorage();
 	//requests.requestGET(url, data, renderTweetsTable,"json");
 		setInterval(function(){requests.requestGET(url, data, renderTweetsTable,"json")}, timeout);
 		
@@ -37,7 +36,7 @@
 	};
 
 	function readTweet(){
-		//debugger;
+		debugger;
 		var IdTweet=this.Id;
 		var i = this.parentNode.parentNode.rowIndex;
 		twitter.pushTweet(tweetsForRender[this.Id]);

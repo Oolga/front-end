@@ -8,9 +8,9 @@ var twitter=(function(){
 	return{
 		pushTweet: function(tweet){
 			debugger;
-			readedTweets.push("indexedDBName",tweet);
-			myIndexedDB().addData("tweets",tweet);
-			//storageManager().getStorage().setItem( storageItemName, JSON.stringify(readedTweets));
+			readedTweets.push(tweet);
+			//myIndexedDB().addData("tweets",tweet);
+			storageManager().setItem( storageItemName,tweet);
 		},
 
 		isReadedTweet: function (tweet){
@@ -48,15 +48,15 @@ var twitter=(function(){
 		},
 
 		checkStorage: function(){
-			if (storageManager().getStorage().getItem( storageItemName)!=null && storageManager().getStorage().getItem( storageItemName)!="")
+			if (storageManager().getItem( storageItemName)!=null && storageManager().getItem( storageItemName)!="")
 				{
 					debugger;
-					readedTweets=JSON.parse(storageManager().getStorage().getItem( storageItemName));
+					readedTweets=JSON.parse(storageManager().getItem( storageItemName));
 					return readedTweets.length;
 				}
 			else 
 				{
-					storageManager().getStorage().setItem( storageItemName, "");
+					//storageManager().setItem( storageItemName, "");
 					return 0;
 				}
 		},

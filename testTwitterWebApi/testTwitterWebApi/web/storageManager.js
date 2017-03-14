@@ -4,7 +4,7 @@ function storageManager(){
 	return {
 		
 		getStorage: function(){
-			debugger;
+			//debugger;
 	 		var ua = window.navigator.userAgent;
 	 		var numberBrowser=0;
 
@@ -40,10 +40,10 @@ function storageManager(){
 		},
 
 		setItem: function(name, data){
-			
+			debugger;
 			storage=storageManager().getStorage();
-			if (storage==window.sessionStorage){
-				storage.setItem(name, data);
+			if (storage===window.sessionStorage){
+				storage.setItem(data.id_str,  JSON.stringify(data));
 			}
 			else{
 				 myIndexedDB().addData("tweets",data);
@@ -51,7 +51,32 @@ function storageManager(){
 		},
 		getItem: function(name){
 			storage=storageManager().getStorage();
-			return storage.getItem(name);
+			var arr=[];
+			if (storage===window.sessionStorage){
+				for (var i=0, len=storage.length; i<len; i++)
+			{
+				var key = storage.key(i);
+    			var value = storage[key];
+    			arr.push(JSON.parse(value));
+			}
+
+			
+			}
+			else
+			{
+				console.log("getItem before arr");
+				arr= myIndexedDB().getAll(function (items) {
+					debugger;
+					console.log("callback");
+					return items;
+  						 }
+					);
+				console.log("getItem after arr");
+				debugger;
+				//return arr;
+			}
+			return arr;//storage.getItem(name);
+			
 		}
 	};
 };
